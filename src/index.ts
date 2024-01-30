@@ -5,7 +5,6 @@ import { Server } from "socket.io";
 
 const app = express();
 const httpServer = createServer(app);
-console.log(process.env.CLIENT_BASE_URL);
 const io = new Server(httpServer, {
   cors: {
     origin: process.env.CLIENT_BASE_URL,
@@ -34,6 +33,14 @@ io.on("connection", (socket) => {
   socket.on("sendSdp", (data: { recipientId: string; sdp: string }) => {
     io.to(data.recipientId).emit("reciveSdp", data.sdp);
   });
+
+  socket.on(
+    "sendCandidate",
+    (data: { recipientId: string; candidate: string }) => {
+      console.log(data.candidate);
+      io.to(data.recipientId).emit("reciveCandidate", data.candidate);
+    }
+  );
 
   // 切断イベント受信
   socket.on("disconnect", (reason) => {
