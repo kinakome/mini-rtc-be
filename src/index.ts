@@ -7,7 +7,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: [process.env.CLIENT_BASE_URL as string, "http://localhost:3000"],
+    origin: "*",
   },
 });
 
