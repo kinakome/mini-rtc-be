@@ -1,9 +1,18 @@
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import { createServer } from "http";
 import { Server } from "socket.io";
 
 const app = express();
+app.use(
+  cors({
+    origin: "*", //アクセス許可するオリジン
+    credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
+    optionsSuccessStatus: 200, //レスポンスstatusを200に設定
+  })
+);
+
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
