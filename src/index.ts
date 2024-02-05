@@ -7,7 +7,7 @@ import { Server } from "socket.io";
 const app = express();
 app.use(
   cors({
-    origin: "*", //アクセス許可するオリジン
+    origin: "localhost:3000", //アクセス許可するオリジン
     credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
     optionsSuccessStatus: 200, //レスポンスstatusを200に設定
   })
@@ -16,7 +16,7 @@ app.use(
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origin: ["localhost:3000"],
   },
 });
 
