@@ -8,7 +8,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: ["https://mini-rtc-fe.vercel.app/"],
+    origin: ["https://mini-rtc-fe.vercel.app/", "http://localhost:3000"],
   },
 });
 
